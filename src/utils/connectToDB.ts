@@ -13,4 +13,4 @@ export async function connectToDB() {
   }
 }
 
-export default connectToDB()
+export default connectToDB

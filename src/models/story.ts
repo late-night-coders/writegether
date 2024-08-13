@@ -48,9 +48,9 @@ const StorySchema = new Schema<Story>({
     type: Number,
     default: 0
   },
-  settings: {
-    type: StorySettingsSchema
-  }
+  // settings: {
+  //   type: StorySettingsSchema
+  // }
 })
 
 export default models.Story || model<Story>('Story', StorySchema)
