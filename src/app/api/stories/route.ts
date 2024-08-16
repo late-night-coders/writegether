@@ -1,5 +1,5 @@
 import { connectToDB } from "@/utils/connectToDB"
-import Story from '@/models/story'
+import Story from "@/models/story"
 
 export async function GET() {
   try {
@@ -7,6 +7,6 @@ export async function GET() {
     const stories = await Story.find({})
     return new Response(JSON.stringify(stories), { status: 200 })
   } catch (error) {
-    return new Response('Failed to fetch all stories', { status: 500 })
+    return new Response("Failed to fetch all stories", { status: 500 })
   }
 }

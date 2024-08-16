@@ -1,5 +1,5 @@
-import { Schema, model, models, Document } from 'mongoose'
-import StorySettingsSchema from './storySettings'
+import { Schema, model, models, Document } from "mongoose"
+import StorySettingsSchema from "./storySettings"
 
 interface Story extends Document {
   title: string
@@ -16,41 +16,41 @@ interface Story extends Document {
 const StorySchema = new Schema<Story>({
   title: {
     type: String,
-    required: [true, 'Title is required']
+    required: [true, "Title is required"],
   },
   authorId: {
     type: String,
-    required: true
+    required: true,
   },
   createdAt: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
   participants: {
     type: [String],
-    default: function(this: Story) {
+    default: function (this: Story) {
       return [this.authorId]
-    }
+    },
   },
   isPrivate: {
     type: Boolean,
-    default: true
+    default: true,
   },
   description: {
     type: String,
-    default: ''
+    default: "",
   },
   openingSegment: {
     type: String,
-    required: [true, 'An opening segment is required!']
+    required: [true, "An opening segment is required!"],
   },
   likeCount: {
     type: Number,
-    default: 0
+    default: 0,
   },
-  // settings: {
-  //   type: StorySettingsSchema
-  // }
+  settings: {
+    type: StorySettingsSchema
+  }
 })
 
-export default models.Story || model<Story>('Story', StorySchema)
+export default models.Story || model<Story>("Story", StorySchema)
