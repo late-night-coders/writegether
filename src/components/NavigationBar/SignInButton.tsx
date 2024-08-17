@@ -1,5 +1,4 @@
 "use client"
-import type { Session } from "next-auth"
 import { signIn } from "next-auth/react"
 
 export default function GoogleSignInButton() {

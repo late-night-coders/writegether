@@ -1,7 +1,5 @@
 import { getServerSession } from "next-auth"
-import GoogleSignInButton from "@/components/NavigationBar/SignInButton"
 import { authConfig } from "@/app/api/auth/[...nextauth]/route"
-import Image from "next/image"
 import {
   AppBar,
   Box,
