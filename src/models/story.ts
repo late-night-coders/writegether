@@ -9,47 +9,57 @@ interface Story extends Document {
   isPrivate: boolean
   description: string
   openingSegment: string
-  likeCount: number
+  likes: number
+  views: number
   settings: Record<string, any>
+  imageUrl: string
 }
 
 const StorySchema = new Schema<Story>({
   title: {
     type: String,
-    required: [true, "Title is required"],
+    required: [true, "Title is required"]
   },
   authorId: {
     type: String,
-    required: true,
+    required: true
   },
   createdAt: {
     type: Date,
-    default: Date.now,
+    default: Date.now
   },
   participants: {
     type: [String],
-    default: function (this: Story) {
+    default: function () {
       return [this.authorId]
-    },
+    }
   },
   isPrivate: {
     type: Boolean,
-    default: true,
+    default: true
   },
   description: {
     type: String,
-    default: "",
+    default: ""
   },
   openingSegment: {
     type: String,
-    required: [true, "An opening segment is required!"],
+    required: [true, "An opening segment is required!"]
   },
-  likeCount: {
+  likes: {
     type: Number,
-    default: 0,
+    default: 0
+  },
+  views: {
+    type: Number,
+    default: 0
   },
   settings: {
     type: StorySettingsSchema
+  },
+  imageUrl: {
+    type: String,
+    default: ""
   }
 })
 
