@@ -5,10 +5,10 @@ import GoogleSignInButton from "./SignInButton"
 import { useState } from "react"
 import { signOut } from "next-auth/react"
 
-const ProfileMenu = ({ imgSrc }: { imgSrc: any }) => {
+const ProfileMenu = ({ imgSrc }: { imgSrc: string }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = (event: React.MouseEvent<HTMLImageElement>) => {
     setAnchorEl(event.currentTarget)
   }
   const handleClose = () => {
@@ -31,7 +31,7 @@ const ProfileMenu = ({ imgSrc }: { imgSrc: any }) => {
             height={40}
             src={imgSrc}
             alt="Google user image"
-            onClick={handleClick as any}
+            onClick={handleClick}
           />
           <Menu
             id="profile-menu"

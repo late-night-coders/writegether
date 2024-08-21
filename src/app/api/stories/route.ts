@@ -1,6 +1,8 @@
 import { connectToDB } from "@/utils/connectToDB"
 import Story from "@/models/story"
 import { NextRequest } from "next/server"
+import { FilterQuery } from "mongoose"
+import type { Story as StoryFields } from "@/types"
 interface SortFields {
   [key: string]: 1 | -1
 }
@@ -15,7 +17,7 @@ const sortBy: Record<string, SortFields> = {
   oldest: { createdAt: 1 }
 }
 
-const filterBy: Record<string, any> = {
+const filterBy: Record<string, FilterQuery<StoryFields>> = {
   trending: { createdAt: { $gte: sevenDaysAgo }, isPrivate: false }
 }
 
