@@ -3,7 +3,7 @@ import connectToDB from "@/utils/connectToDB"
 import { NextRequest } from "next/server"
 
 interface StoryParams {
-  id: string
+  storyId: string
 }
 
 export const GET = async (
@@ -14,10 +14,10 @@ export const GET = async (
     params: StoryParams
   }
 ) => {
-  const { id } = params
+  const { storyId } = params
   try {
     await connectToDB()
-    const story = await Story.findById(id)
+    const story = await Story.findById(storyId)
 
     if (!story) return new Response("Story Not Found", { status: 404 })
 
@@ -35,11 +35,11 @@ export const DELETE = async (
     params: StoryParams
   }
 ) => {
-  const { id } = params
+  const { storyId } = params
 
   try {
     await connectToDB()
-    await Story.findByIdAndDelete(id)
+    await Story.findByIdAndDelete(storyId)
 
     return new Response("Story deleted successfully", { status: 200 })
   } catch (error) {
@@ -47,9 +47,9 @@ export const DELETE = async (
   }
 }
 
-export const PATCH = async (request: NextRequest) => {
-  const { newData } = await request.json()
-  const { id, title, openingSegment } = newData
+export const PUT = async (request: NextRequest) => {
+  const response = await request.json()
+  const { id, title, openingSegment } = response
   try {
     await connectToDB()
     const story = await Story.findById(id)
