@@ -9,10 +9,10 @@ interface StoryParams {
 export const GET = async (
   _request: NextRequest,
   {
-    params,
+    params
   }: {
     params: StoryParams
-  },
+  }
 ) => {
   const { id } = params
   try {
@@ -27,35 +27,13 @@ export const GET = async (
   }
 }
 
-export const POST = async (request: NextRequest) => {
-  try {
-    const { authorId, title, openingSegment } = await request.json()
-
-    await connectToDB()
-    const story = new Story({
-      authorId,
-      title,
-      openingSegment,
-    })
-
-    await story.save()
-    return new Response(JSON.stringify(story), {
-      status: 201,
-    })
-  } catch (error) {
-    return new Response("Failed to save the story in the database.", {
-      status: 500,
-    })
-  }
-}
-
 export const DELETE = async (
   _request: NextRequest,
   {
-    params,
+    params
   }: {
     params: StoryParams
-  },
+  }
 ) => {
   const { id } = params
 
@@ -69,9 +47,7 @@ export const DELETE = async (
   }
 }
 
-export const PATCH = async (
-  request: NextRequest
-) => {
+export const PATCH = async (request: NextRequest) => {
   const { newData } = await request.json()
   const { id, title, openingSegment } = newData
   try {
