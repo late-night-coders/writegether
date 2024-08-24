@@ -14,7 +14,7 @@ import ProfileMenu from "./ProfileMenu"
 const NavigationBar = async () => {
   const session = await getServerSession(authConfig)
   return (
-    <AppBar color="primary">
+    <AppBar sx={{ position: 'relative' }} color="primary">
       <Container>
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
           <Link href="/">
@@ -46,7 +46,7 @@ const NavigationBar = async () => {
             <Link href="/help">
               <Button color="inherit">HELP</Button>
             </Link>
-            <ProfileMenu imgSrc={session?.user?.image} />
+            <ProfileMenu imgSrc={session?.user?.image!} />
           </Box>
         </Toolbar>
       </Container>

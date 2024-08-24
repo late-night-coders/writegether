@@ -22,7 +22,6 @@ const TrendingBanner = () => {
       <Box
         sx={{
           display: "flex",
-          marginTop: "2rem",
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
