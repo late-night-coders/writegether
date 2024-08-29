@@ -14,7 +14,7 @@ import ProfileMenu from "./ProfileMenu"
 const NavigationBar = async () => {
   const session = await getServerSession(authConfig)
   return (
-    <AppBar color="primary">
+    <AppBar color="primary" position="relative">
       <Container>
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
           <Link href="/">
