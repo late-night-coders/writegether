@@ -6,7 +6,7 @@ export default function GoogleSignInButton() {
     signIn("google")
   }
   return (
-    <button onClick={handleClick} color="inherit">
+    <button onClick={handleClick}>
       LOGIN
     </button>
   )

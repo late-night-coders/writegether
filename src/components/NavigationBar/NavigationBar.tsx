@@ -16,12 +16,12 @@ const NavigationBar = async () => {
         </li>
         <li>
           <Link href="/contribute">
-            <button color="inherit"> Contribute </button>
+            <button> Contribute </button>
           </Link>
         </li>
         <li>
           <Link href="/create">
-            <button color="inherit"> Create </button>
+            <button> Create </button>
           </Link>
         </li>
       </ul>
