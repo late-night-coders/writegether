@@ -1,5 +1,4 @@
 "use client"
-import { Button } from "@mui/material"
 import { signIn } from "next-auth/react"
 
 export default function GoogleSignInButton() {
@@ -7,8 +6,8 @@ export default function GoogleSignInButton() {
     signIn("google")
   }
   return (
-    <Button onClick={handleClick} color="inherit">
+    <button onClick={handleClick}>
       LOGIN
-    </Button>
+    </button>
   )
 }
