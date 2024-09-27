@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth"
 import StoryCreationForm from "@/components/StoryCreationForm/StoryCreationForm"
 import connectToDB from "@/utils/connectToDB"
-import Story from '@/models/story'
+import Story from "@/models/story"
 import { authConfig } from "../api/auth/[...nextauth]/route"
 
 export interface StoryData {
@@ -14,8 +14,8 @@ const createStory = async ({
   title,
   openingSegment
 }: {
-  authorId: string,
-  title: string,
+  authorId: string
+  title: string
   openingSegment: string
 }) => {
   try {
@@ -25,22 +25,18 @@ const createStory = async ({
       openingSegment
     })
     await story.save()
-
   } catch (error) {
-    throw new Error('Failed to create story')
+    throw new Error("Failed to create story")
   }
 }
 
-const onPostAction = async ({
-  title,
-  openingSegment
-}: StoryData) => {
+const onPostAction = async ({ title, openingSegment }: StoryData) => {
   "use server"
   try {
     await connectToDB()
     const session = await getServerSession(authConfig)
     if (!session || !session.user?.id) {
-      throw new Error('User session not found')
+      throw new Error("User session not found")
     }
     await createStory({
       authorId: session.user.id,
@@ -48,7 +44,7 @@ const onPostAction = async ({
       openingSegment
     })
   } catch (error) {
-    console.error('Failed to post a story:', error)
+    console.error("Failed to post a story:", error)
   }
 }
 
