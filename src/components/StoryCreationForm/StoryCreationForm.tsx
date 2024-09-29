@@ -3,8 +3,8 @@ import { useForm } from "react-hook-form"
 import { Form, FormField, FormItem, FormLabel, FormControl } from "../ui/form"
 import { Input } from "../ui/input"
 import { Textarea } from "../ui/textarea"
-import { Button } from "../ui/button"
 import type { StoryData } from "@/app/create/page"
+import ImageUploadInput from "./ImageUploadInput"
 
 const StoryCreationForm = ({
   onPostAction
@@ -54,16 +54,7 @@ const StoryCreationForm = ({
           />
         </div>
         <div className="w-full flex flex-col lg:w-1/4 space-y-4">
-          <div className="w-full lg:aspect-w-1 lg:aspect-h-1">
-            <Button className="w-full h-full min-h-[100px] flex flex-col cursor-pointer border-2 border-dashed border-neon-yellow-600 bg-background lg:bg-neon-yellow-100 rounded text-black hover:bg-neon-yellow-200">
-              <img src="/icons/photo.svg" width={40} alt="Upload cover photo" />
-              <p>Upload Cover Photo</p>
-            </Button>
-          </div>
-          <Button className="bg-neon-yellow-600 w-full hover:bg-neon-yellow-800 text-white ">
-            {" "}
-            POST{" "}
-          </Button>
+          <ImageUploadInput />
         </div>
       </form>
     </Form>
