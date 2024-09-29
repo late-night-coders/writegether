@@ -25,6 +25,12 @@ export const authConfig: NextAuthOptions = {
         console.error("Could not save the user in the database")
         return false
       }
+    },
+    async session({ session, token }) {
+      if (token.sub && session.user) {
+        session.user.id = token.sub
+      }
+      return session
     }
   }
 }
