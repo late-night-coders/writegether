@@ -44,6 +44,16 @@ const config: Config = {
       black: "#0B0D03"
     },
     extend: {
+      fontSize: {
+        '5xl': '3rem',
+        '4xl': '2.5rem',
+        '3xl': '2rem',
+        '2xl': '1.75rem',
+        'xl': '1.5rem',
+        'base': '1rem',
+        'small': '0.875rem',
+        'tiny': '0.75rem'
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
