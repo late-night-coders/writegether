@@ -4,22 +4,32 @@ import { Form, FormField, FormItem, FormLabel, FormControl } from "../ui/form"
 import { Input } from "../ui/input"
 import { Textarea } from "../ui/textarea"
 import type { StoryData } from "@/app/create/page"
-import ImageUploadInput from "./ImageUploadInput"
+import StorySettingsBar from "./StorySettingsBar"
+import { useState } from "react"
 
 const StoryCreationForm = ({
   onPostAction
 }: {
   onPostAction: (data: StoryData) => Promise<void>
 }) => {
-  const onSubmitHandler = (data: StoryData) => {
-    onPostAction(data)
+  const [ isLoading, setIsLoading ] = useState(false)
+
+  const onSubmitHandler = async (data: StoryData) => {
+    setIsLoading(true)
+    try {
+      await onPostAction(data)
+    } finally {
+      setIsLoading(false)
+    }
   }
+
   const form = useForm({
     defaultValues: {
       title: "",
       openingSegment: ""
     }
   })
+
   return (
     <Form {...form}>
       <h1 className="text-lg lg:text-4xl font-bold mb-12"> Create a story </h1>
@@ -54,7 +64,7 @@ const StoryCreationForm = ({
           />
         </div>
         <div className="w-full flex flex-col lg:w-1/4 space-y-4">
-          <ImageUploadInput />
+          <StorySettingsBar isLoading={isLoading} />
         </div>
       </form>
     </Form>
