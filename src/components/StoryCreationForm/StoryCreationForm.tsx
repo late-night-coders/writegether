@@ -1,20 +1,35 @@
 "use client"
+import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
+import z from 'zod'
+import { zodResolver } from "@hookform/resolvers/zod"
 import { Form, FormField, FormItem, FormLabel, FormControl } from "../ui/form"
 import { Input } from "../ui/input"
 import { Textarea } from "../ui/textarea"
 import type { StoryData } from "@/app/create/page"
 import StorySettingsBar from "./StorySettingsBar"
-import { useState } from "react"
+import schema from './schema'
+import ErrorModal from "../common/ErrorModal"
+
+type StorySchema = z.infer<typeof schema>
 
 const StoryCreationForm = ({
   onPostAction
 }: {
   onPostAction: (data: StoryData) => Promise<void>
 }) => {
-  const [ isLoading, setIsLoading ] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
-  const onSubmitHandler = async (data: StoryData) => {
+  const form = useForm<StorySchema>({
+    resolver: zodResolver(schema),
+    defaultValues: {
+      title: "",
+      openingSegment: ""
+    }
+  })
+
+  const onSubmitHandler = async (data: StorySchema) => {
     setIsLoading(true)
     try {
       await onPostAction(data)
@@ -23,12 +38,11 @@ const StoryCreationForm = ({
     }
   }
 
-  const form = useForm({
-    defaultValues: {
-      title: "",
-      openingSegment: ""
-    }
-  })
+  useEffect(() => {
+   if (Object.keys(form.formState.errors).length > 0) {
+    setIsModalOpen(true)
+   }
+  }, [form.formState.errors])
 
   return (
     <Form {...form}>
@@ -57,7 +71,7 @@ const StoryCreationForm = ({
               <FormItem>
                 <FormLabel>Opening segment</FormLabel>
                 <FormControl>
-                  <Textarea {...field} />
+                  <Textarea placeholder="The first segment of your story. This is where your journey begins..." {...field} />
                 </FormControl>
               </FormItem>
             )}
@@ -67,6 +81,7 @@ const StoryCreationForm = ({
           <StorySettingsBar isLoading={isLoading} />
         </div>
       </form>
+      {isModalOpen && <ErrorModal onClose={() => setIsModalOpen(false)} />}
     </Form>
   )
 }
