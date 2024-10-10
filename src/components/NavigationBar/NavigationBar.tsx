@@ -10,7 +10,7 @@ const NavigationBar = async () => {
       <Link href="/" className="w-full">WRITEGETHER</Link>
       <ul className="flex flex-col h-full border-2">
         <li className="flex">
-          <Link href="/discover">
+          <Link href="/">
             <button type="button"> Discover </button>
           </Link>
         </li>
@@ -20,7 +20,7 @@ const NavigationBar = async () => {
           </Link>
         </li>
         <li className="flex">
-          <Link href="/create">
+          <Link href="/begin-a-story">
             <button type="button"> Create </button>
           </Link>
         </li>
