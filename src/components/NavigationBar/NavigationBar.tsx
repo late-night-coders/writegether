@@ -6,22 +6,22 @@ import ProfileMenu from "./ProfileMenu"
 const NavigationBar = async () => {
   const session = await getServerSession(authConfig)
   return (
-    <nav className="flex space-x-2 justify-between py-4 px-4 xl:px-20 text-lg">
-      <Link href="/">WRITEGETHER</Link>
-      <ul className="flex space-x-48">
-        <li>
+    <nav className="flex flex-col w-[14.7rem] gap-10 border-4 border-green-700 p-1">
+      <Link href="/" className="w-full">WRITEGETHER</Link>
+      <ul className="flex flex-col h-full border-2">
+        <li className="flex">
           <Link href="/discover">
-            <button> Discover </button>
+            <button type="button"> Discover </button>
           </Link>
         </li>
-        <li>
+        <li className="flex">
           <Link href="/contribute">
-            <button> Contribute </button>
+            <button type="button"> Contribute </button>
           </Link>
         </li>
-        <li>
+        <li className="flex">
           <Link href="/create">
-            <button> Create </button>
+            <button type="button"> Create </button>
           </Link>
         </li>
       </ul>
