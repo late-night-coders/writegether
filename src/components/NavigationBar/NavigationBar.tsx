@@ -21,7 +21,7 @@ const NavigationBar = async () => {
         </li>
         <li className="flex">
           <Link href="/begin-a-story">
-            <button type="button"> Create </button>
+            <button type="button">Begin a Story</button>
           </Link>
         </li>
       </ul>
