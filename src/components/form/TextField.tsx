@@ -5,7 +5,7 @@ type Props = {
     name: string
     label: string
     placeholder?: string
-    type?: "text" | "password"
+    type?: React.HTMLInputTypeAttribute
 }
 export default function TextField({ formControl, name, placeholder = "", label, type = "text" }: Props) {
     return (

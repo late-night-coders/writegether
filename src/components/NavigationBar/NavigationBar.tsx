@@ -9,17 +9,17 @@ const NavigationBar = async () => {
     <nav className="flex flex-col w-[14.7rem] gap-10 border-4 border-green-700 p-1">
       <Link href="/" className="w-full">WRITEGETHER</Link>
       <ul className="flex flex-col h-full border-2">
-        <li className="flex">
+        <li>
           <Link href="/">
             <button type="button"> Discover </button>
           </Link>
         </li>
-        <li className="flex">
+        <li>
           <Link href="/contribute">
             <button type="button"> Contribute </button>
           </Link>
         </li>
-        <li className="flex">
+        <li>
           <Link href="/begin-a-story">
             <button type="button">Begin a Story</button>
           </Link>
