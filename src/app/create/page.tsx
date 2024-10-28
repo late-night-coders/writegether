@@ -49,6 +49,7 @@ const onPostAction = async ({ title, openingSegment }: StoryData) => {
 }
 
 export default async function StoryCreationPage() {
+
   return (
     <main>
       <StoryCreationForm onPostAction={onPostAction} />

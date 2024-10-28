@@ -1,25 +1,49 @@
 "use client"
+import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
+import z from 'zod'
+import { zodResolver } from "@hookform/resolvers/zod"
 import { Form, FormField, FormItem, FormLabel, FormControl } from "../ui/form"
 import { Input } from "../ui/input"
 import { Textarea } from "../ui/textarea"
 import type { StoryData } from "@/app/create/page"
-import ImageUploadInput from "./ImageUploadInput"
+import StorySettingsBar from "./StorySettingsBar"
+import schema from './schema'
+import ErrorModal from "../common/ErrorModal"
+
+type StorySchema = z.infer<typeof schema>
 
 const StoryCreationForm = ({
   onPostAction
 }: {
   onPostAction: (data: StoryData) => Promise<void>
 }) => {
-  const onSubmitHandler = (data: StoryData) => {
-    onPostAction(data)
-  }
-  const form = useForm({
+  const [isLoading, setIsLoading] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const form = useForm<StorySchema>({
+    resolver: zodResolver(schema),
     defaultValues: {
       title: "",
       openingSegment: ""
     }
   })
+
+  const onSubmitHandler = async (data: StorySchema) => {
+    setIsLoading(true)
+    try {
+      await onPostAction(data)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  useEffect(() => {
+   if (Object.keys(form.formState.errors).length > 0) {
+    setIsModalOpen(true)
+   }
+  }, [form.formState.errors])
+
   return (
     <Form {...form}>
       <h1 className="text-lg lg:text-4xl font-bold mb-12"> Create a story </h1>
@@ -47,16 +71,17 @@ const StoryCreationForm = ({
               <FormItem>
                 <FormLabel>Opening segment</FormLabel>
                 <FormControl>
-                  <Textarea {...field} />
+                  <Textarea placeholder="The first segment of your story. This is where your journey begins..." {...field} />
                 </FormControl>
               </FormItem>
             )}
           />
         </div>
         <div className="w-full flex flex-col lg:w-1/4 space-y-4">
-          <ImageUploadInput />
+          <StorySettingsBar isLoading={isLoading} />
         </div>
       </form>
+      {isModalOpen && <ErrorModal onClose={() => setIsModalOpen(false)} />}
     </Form>
   )
 }
